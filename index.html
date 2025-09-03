@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Simran</title>
+  <style>
+    :root {
+      --pink:#ff4b5c; --gold:#ffd369; --teal:#08d9d6; --violet:#6a2c70; --orange:#ff8c42;
+    }
+    *{box-sizing:border-box; transition: all 0.3s ease;}
+    body{margin:0; font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif; overflow:hidden; color:#fff;}
+    .app{position:relative; width:100vw; height:100vh;}
+    .segment{position:absolute; inset:0; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:2rem; opacity:0; transition: opacity 1s ease-in-out;}
+    .segment.active{display:flex; opacity:1;}
+    h1{font-size:3rem; margin:0 0 1rem; text-align:center;}
+    h2{font-size:2rem; margin:0 0 1rem;}
+    p{max-width:800px;}
+    .content{max-width:760px; line-height:1.6; font-size:1.15rem; padding:1rem 1.25rem; border-radius:12px;}
+    .next-btn{margin-top:2rem; padding:1rem 2rem; font-size:1.1rem; border:none; border-radius:999px; background:var(--pink); color:#fff; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+    .next-btn:hover{transform:scale(1.1); background:#ff1e3c; box-shadow:0 6px 20px rgba(0,0,0,0.5);}
+    .final-bday{font-size:3rem; text-shadow:0 0 10px #fff,0 0 20px #ff1e3c,0 0 40px #ff4b5c; animation:glow 2s infinite alternate;}
+    @keyframes glow{from{opacity:.95; text-shadow:0 0 10px #fff,0 0 20px var(--pink)} to{opacity:1; text-shadow:0 0 20px #fff,0 0 40px #ff1e3c,0 0 60px var(--pink)}}
+
+    /* Effects */
+    .balloon{position:fixed; bottom:-120px; width:46px; height:62px; border-radius:50% 50% 45% 45%; box-shadow:inset -6px -10px 0 rgba(0,0,0,.08);}
+    .string{position:fixed; width:2px; height:40px; background:rgba(255,255,255,.6);}
+    @keyframes floatUp{from{transform:translateY(110vh) scale(.9); opacity:.9} to{transform:translateY(-130vh) scale(1.1); opacity:0}}
+    .confetti{position:fixed; width:8px; height:12px; border-radius:2px;}
+    @keyframes confFall{from{transform:translateY(-10vh) rotate(0)} to{transform:translateY(110vh) rotate(360deg)}}
+    .heart{position:fixed; font-size:1.4rem; text-shadow:0 0 6px #fff;}
+    @keyframes rise{from{transform:translateY(20vh) scale(.8); opacity:.8} to{transform:translateY(-110vh) scale(1.4); opacity:0}}
+    .shooting{position:fixed; width:2px; height:2px; background:#fff; box-shadow:0 0 8px #fff; transform:rotate(45deg);}
+  </style>
+</head>
+<body>
+<div class="app">
+  <!-- PAGE 1 -->
+  <section class="segment active" id="seg1" style="background:linear-gradient(135deg,#ffdde1,#ee9ca7)">
+    <h1>🎂 Happy Birthday Simran 🎉</h1>
+    <p>Today is all about you — let the surprises begin! ✨</p>
+    <button class="next-btn" onclick="go(2)">🎁 Open your first surprise</button>
+  </section>
+
+  <!-- PAGE 2 -->
+  <section class="segment" id="seg2" style="background:radial-gradient(1200px 800px at 50% 100%, #1a2a6c, #000428)">
+    <h2>🌙 A Few Words For You 🌟</h2>
+    <div class="content">
+Tere chehre ki roshni chaand se bhi pyaari hai, Teri aankhon ki chamak sitaron se bhi nyaari hai… Tera chehra chaand jaisa roshan lagta hai, Teri aankhein gehre samundar jaisi lagti hai… Teri awaaz jaise koyal ki madhur dhun ho, Teri muskaan mein saari duniya ka sukoon ho…, Tujhe koi or chaahe is baat se thoda jalta hu lekin , Guroor hai mujhe ke meri Pasand pr log marte hai.... Taare dekhe jab aasman me or gina unhe, tb pta laga ki rkhna chahta hu utna sang tumhe... Mana ki thoda pagal hu gadha hu pr rkh skta hu har preshani se door tumhe.. Chahta hu milu har janam tumse , Is nhi to agle to hoga tumhe apnana mujhe.. Tujhko hai bass haqq ye , tu mujhko sataya kar , pata hai kya hua aaj , ye keh kar mujhe sab btaya kar..Aaj ke din meri bas itni si dua hai, Teri zindagi mein har din nayi khushiyon ki hawa chale..Ab tu shehar me hai or kabhi dikh jaye to mai likhta nhi , or agar likhdu to tere siva kuch dikhta nhi..  Jo chahe wo mil jaye tujhe koshish krunga banu wo toota taara tera , Haste raha kr meri jaan nahi to bol bol kar khata rahunga sir mai tera
+    </div>
+    <button class="next-btn" onclick="go(3)">💖 Next surprise</button>
+  </section>
+
+  <!-- PAGE 3 -->
+  <section class="segment" id="seg3" style="background:linear-gradient(135deg,#f8cdda,#1d2b64)">
+    <h2>💌 A Special Something</h2>
+    <button class="next-btn" onclick="reveal()">Tap to reveal</button>
+    <div id="hidden-message" style="margin-top:1rem; font-weight:700; color:#ffe8a3; display:none; font-size:1.25rem;">
+      You are more than just a friend… you are truly special to me❤️
+    </div>
+    <button class="next-btn" onclick="go(4)">✨ Final surprise</button>
+  </section>
+
+  <!-- PAGE 4: Journey Intro -->
+  <section class="segment" id="seg4" style="background:linear-gradient(to right,#fbc2eb,#a6c1ee); color:#FF0000;">
+    <h2>To chal akku, tujhe ab thoda flashback me leke chalte hai...</h2>
+    <button class="next-btn" onclick="go(5)">➡ Start Journey</button>
+  </section>
+
+  <!-- TIMELINE PAGES -->
+  <!-- May 2024 -->
+  <section class="segment" id="seg5" style="background:linear-gradient(to right,#fddb92,#d1fdff); color:#000;">
+    <h2>May 2024</h2>
+    <div class="content">
+Ham pehli baar mile ek app pr jaha hamari first meet Hui. Thodi thodi baate Hui ek dusre se. Hame milaya kisi ne jo ham dono ka common friend tha ya ye bhagwan ka hi ek khel tha ki hame ese milna tha..
+    </div>
+    <button class="next-btn" onclick="go(6)">➡ Next</button>
+  </section>
+
+  <!-- June 2024 -->
+  <section class="segment" id="seg6" style="background:linear-gradient(to right,#a1c4fd,#c2e9fb); color:#000;">
+    <h2>June 2024</h2>
+    <div class="content">
+Hamari normal baate Hui, specially Chandigarh hamara main topic tha. Hamne Chandigarh ki baate kri aur bohat sara fun kia — chahe wo Sukhna ke charche ho, 15 ki Chinese market ho, ya college life.
+    </div>
+    <button class="next-btn" onclick="go(7)">➡ Next</button>
+  </section>
+
+  <!-- July-Aug 2024 -->
+  <section class="segment" id="seg7" style="background:linear-gradient(to right,#ffecd2,#fcb69f); color:#000;">
+    <h2>July - August 2024</h2>
+    <div class="content">
+Mai kahi na kahi bohat preshan tha apni college life ko leke jaha mai kisi ko leke bohat preshan tha. Mere hi friends mujhe ignore kr rhe the. Mai Sugo pr active hone laga. Wapas maine tujhse ek dum se kuch connect feel kia aur tujhe sari baat maine share kri. Usi me maine apne college ke kuch moments btaye jisse tujhe pata lga ki mai future ke liye hath bhi dekhta hu, fir maine tera hath dekha. Hamari kuch chije connect hui aur usi bahane maine teri first time voice suni aur maine kaha, “are ye to bachi wali voice hai heheh,” yaad hai? Jab rakhi ke jokes mare, jab maine kaha ki Valentine’s pe gift dunga, to tune kaha rakhi pe do. Wo bhi kya mast phase tha..
+    <br>August me rakhi ke jokes mare, maine kaha Valentine's pe gift dunga, tune kaha Rakhi pe do. Mast phase tha.
+    </div>
+    <button class="next-btn" onclick="go(8)">➡ Next</button>
+  </section>
+
+  <!-- September 2024 -->
+  <section class="segment" id="seg8" style="background:linear-gradient(to right,#ff9a9e,#fecfef); color:#000;">
+    <h2>September 2024</h2>
+    <div class="content">
+Mujhe bohat acha lagne laga, tune bhi apni kuch college ki stories mujhe btayi. Hamari dosti bohat achi hogyi, bohat fun kia hamne, kabhi kabhi flirt bhi kia. Maine aur usi bich tune mujhe mera ek bekar past ke name se chhedna shuru kia aur Gamla name introduce hua 😂😂..
+    </div>
+    <button class="next-btn" onclick="go(9)">➡ Next</button>
+  </section>
+
+  <!-- October - Nov 2024 -->
+  <section class="segment" id="seg9" style="background:linear-gradient(to right,#a8edea,#fed6e3); color:#000;">
+    <h2>October - November 2024</h2>
+    <div class="content">
+“Gamla” ke name se chhedne se leke meri khichai tak sab shi tha, maza aya. Mai pehli baar kisi ese se mila jisne mujhe chup kra dia, jisne mujhe smjhaya, jo aksar mai sabko krta tha lekin mere liye koi nahi krta tha. Mujhe bohat acha lga. Back of the mind, mere man me tha ki mai close hua to mera dil toot jayega 💔. Maine thoda kam hi krne lga, lekin jo bhi tha genuine tha, mera dil hmesha tere liye ek space bnake rkha hua tha.
+    </div>
+    <button class="next-btn" onclick="go(10)">➡ Next</button>
+  </section>
+
+  <!-- December 2024 -->
+  <section class="segment" id="seg10" style="background:linear-gradient(to right,#ff9a9e,#ffd6a5); color:#000;">
+    <h2>December 2024</h2>
+    <div class="content">
+Mai bohat tension me tha internship ko leke, lekin tune mujhe motivate kia 💪, mera moral down nahi hone dia. Jab mai raat bhar baith ke sochta tha “kya kru, kaha jau”, tab tu mujhe smjhati thi 🫂.
+    </div>
+    <button class="next-btn" onclick="go(11)">➡ Next</button>
+  </section>
+
+  <!-- January 2025 -->
+  <section class="segment" id="seg11" style="background:linear-gradient(to right,#fddb92,#d1fdff); color:#000;">
+    <h2>January 2025</h2>
+    <div class="content">
+Mujhe internship ke liye Bangalore jana pada. Mere hi dost ne mujhe dhoka deke mere hath se ek opportunity chhin li 😔, mai bohat sad tha. Par tune tb bhi mujhe akele nahi chhoda aur mujhe smjhaya. Though tu ek alag field se hai, tune mujhe smjha. Maine tujhe apni sari career ki story btayi 📖. Tune mujhe appreciate Kia jo kisi ne nahi kia tha itna bina kisi selfishness ke 💙.
+    </div>
+    <button class="next-btn" onclick="go(12)">➡ Next</button>
+  </section>
+
+  <!-- February 2025 -->
+  <section class="segment" id="seg12" style="background:linear-gradient(to right,#ffecd2,#fcb69f); color:#000;">
+    <h2>February 2025</h2>
+    <div class="content">
+Snapchat entry: 28 Jan 2025, Snapchat ki entry hui jab tune mujhe apni Snap ID di 📱. Mai bohat khush hua us din 😄. Teri line ab bhi yaad hai: “snap deri hu streak tuti to mai block krdeti hu” 😂😂. Ham Snap pe bhi baat krne lge, jo meri life ka best phase tha 🌟.
+    </div>
+    <button class="next-btn" onclick="go(13)">➡ Next</button>
+  </section>
+
+  <!-- March 2025 -->
+  <section class="segment" id="seg13" style="background:linear-gradient(to right,#a1c4fd,#c2e9fb); color:#000;">
+    <h2>March 2025</h2>
+    <div class="content">
+Hamne kya mast “shadi jokes” aur flirt start kia 😏. Ek time ko teri masi mujhe BF smjhne lge 🤣, yaad hai? Tune btaya ki “mummy kehti hai PEC ke bache kitne ache hote hai”, to maine kaha “samne chhora shehar me dhindora mai to krlunga”, shadi tujhse tune kaha “IAS bn gye tb krlungi” 😂.
+    </div>
+    <button class="next-btn" onclick="go(14)">➡ Next</button>
+  </section>
+
+  <!-- April 2025 -->
+  <section class="segment" id="seg14" style="background:linear-gradient(to right,#89f7fe,#66a6ff); color:#000;">
+    <h2>April 2025</h2>
+    <div class="content">
+Tujhe ek proposal aya, tu thoda preshan ho gyi 😟, tune mujhse share bhi kri. Maine tujhe smjhaya, jo tere liye best option ho skte the, bina apne bare soche. Bas ye soch ke ki tu khush rhe. Maine dekha tu khush lgri thi to maine roka bhi nahi 😌.
+Tune mere bday ke liye kapde bhi select kraye 👕👖 aur mujhe ache se wish kia 🎂, mujhe acha lga, though tune late kia thoda 😂🤣.
+    </div>
+    <button class="next-btn" onclick="go(15)">➡ Next</button>
+  </section>
+
+  <!-- May 2025 -->
+  <section class="segment" id="seg15" style="background:linear-gradient(to right,#fddb92,#d1fdff); color:#000;">
+    <h2>May 2025</h2>
+    <div class="content">
+Sab shi chlra tha, tu khush thi. Hamne bohat chije share kri. Maine tujhe company me ek intern ka btaya, tu chidi “jao uske pass” 😄, mai i don’t know, wo mazak tha ya sach, bohat acha tha 🤣😂.
+Tune mujhe ek reel bheji Snap pr, mai teri Insta ID pe gya aur pehli baar maine tujhe dekha 👀, aur mai dekhte hi pgl hogya 😳. Maine kaha “teri voice aur shakal match nahi hoti”. Hamari friendship gehri hogyi❤️.
+    </div>
+    <button class="next-btn" onclick="go(16)">➡ Next</button>
+  </section>
+
+  <!-- June 2025 -->
+  <section class="segment" id="seg16" style="background:linear-gradient(to right,#ff9a9e,#fecfef); color:#000;">
+    <h2>June 2025</h2>
+    <div class="content">
+May end aur June me kuch issues aaye 😔, jisse tu bohat preshan hui. Maine apne side se apna best diya ki mai sab sort kr pau. Maine kabhi kisi situation ka fayda uthane ki try nahi ki. Mujhe us time smjh aya ki tu kitni mature aur smjhdar ladki hai. Mujhe tere side se bhi jo galti lgi, maine tujhe smjhaya aur tune meri respect ki aur chije mani bhi 💖.
+    </div>
+    <button class="next-btn" onclick="go(17)">➡ Next</button>
+  </section>
+
+  <!-- July 2025 -->
+  <section class="segment" id="seg17" style="background:linear-gradient(to right,#a8edea,#fed6e3); color:#000;">
+    <h2>July 2025</h2>
+    <div class="content">
+Chandigarh wapas aa chuka tha, bohat chije change ho chuki thi 🔄. Tune bhi us scene se move on kr lia. July end tk Sugo pe ayi bhi, tab tk ham Snap pr hi baat krte the. Hamne bohat maze kiye 😆, enjoy kia. Chahe wo jab mai milne aau to tere laare lagana 😂 ya Insta pe follow back ki baate ho, jo bhi tha acha tha.
+    </div>
+    <button class="next-btn" onclick="go(18)">➡ Next</button>
+  </section>
+
+  <!-- August 2025 -->
+  <section class="segment" id="seg18" style="background:linear-gradient(to right,#89f7fe,#66a6ff); color:#000;">
+    <h2>August 2025</h2>
+    <div class="content">
+Ek Mansi ka scene hua jisme block wali baat ko leke maine tujhe hurt krdia once again 😔, uske liye sorry. Us raat realise hua ki tu mere life me kya hai aur kitni important hai 🌹. Mai pehli baar kisi ke liye itna roya 😢. Fir full try kia ki mai tujhe mana pau, but mai chhodna nahi chahta tha. Tujhe to maine full efforts kiye aur kasam khayi ki kabhi bhi dil nahi todunga 💖.
+    </div>
+    <button class="next-btn" onclick="go(19)">➡ Next</button>
+  </section>
+
+  <!-- Final Thoughts..Simmu -->
+  <section class="segment" id="seg19" style="background:linear-gradient(to right,#fddb92,#ff9a9e); color:#000;">
+    <h2>Final Thoughts</h2>
+    <div class="content">
+Bhengi🙄🙄Tera fav emoji kese bhul skta ese hi ab mujhe tu dikhti hai har jagah
+Haa mai overthinking krta hu kabhi kabhi darta hu tujhe kho na du, par ye sbse bada proof hai ki mai kitna serious hu.Hamesha tere sath khada hu. Tu mujhpe bilkul trust kr skti hai. Mai bhi chahta hu tu meri tarah acha feel kre.Jaise tune ek mere ese version ko jise lgta tha wo kisi se attachment kr hi ni skta self blame krna tune wo chij change kri or mujhe smjh aya ki koshish ki jaye to aap 100 buro ki jagah 1 shi ke sath khush reh skte ho Give me a chance, no trust issues and if is journey me mujhse koi mistake hui ho to SURRIIEE and Bhulja use ab sb shi hai and better hai or ese hi rhega.
+🎉 Happy Birthday, enjoy mere Chiku mere Cheetah, tu best hai sbse 🥰, love you sbse jada 🤗.. Or please mujhse milna, mai online se offline hona chahta hu, bs der mat krna ki mai rahu hi na Chandigarh me 🏡.
+    </div>
+    <button class="next-btn" onclick="go(20)">➡ Final</button>
+  </section>
+
+  <!-- Happy Birthday Finale -->
+  <section class="segment" id="seg20" style="background:linear-gradient(135deg,#ff9a9e,#fecfef); color:#fff;">
+    <h1 class="final-bday">🎉 H A P P Y  B I R T H D A Y  S I M R A N 🎂</h1>
+    <p>May your day be filled with love, laughter, and all the happiness you deserve! 💖🎈🎁</p>
+  </section>
+</div>
+
+<script>
+  let current = 1;
+  function go(num){
+    document.getElementById('seg'+current).classList.remove('active');
+    current = num;
+    document.getElementById('seg'+current).classList.add('active');
+  }
+
+  function reveal(){
+    document.getElementById('hidden-message').style.display = 'block';
+  }
+
+  // Balloon animation
+  for(let i=0;i<25;i++){
+    let b=document.createElement('div');
+    b.className='balloon';
+    b.style.left=Math.random()*100+'vw';
+    b.style.background=`hsl(${Math.random()*360},90%,65%)`;
+    b.style.animation=`floatUp ${5+Math.random()*5}s linear infinite`;
+    document.body.appendChild(b);
+    let s=document.createElement('div'); s.className='string';
+    s.style.left=b.style.left; s.style.top=b.style.top; s.style.height='50px';
+    document.body.appendChild(s);
+  }
+
+  // Hearts animation
+  setInterval(()=>{
+    let heart=document.createElement('div');
+    heart.className='heart';
+    heart.style.left=Math.random()*100+'vw';
+    heart.style.color=`hsl(${Math.random()*360},100%,70%)`;
+    heart.innerHTML='❤️';
+    heart.style.animation=`rise ${3+Math.random()*3}s linear`;
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },300);
+
+  // Confetti
+  for(let i=0;i<50;i++){
+    let c=document.createElement('div');
+    c.className='confetti';
+    c.style.background=`hsl(${Math.random()*360},90%,60%)`;
+    c.style.left=Math.random()*100+'vw';
+    c.style.top=Math.random()*-20+'vh';
+    c.style.animation=`confFall ${3+Math.random()*5}s linear infinite`;
+    document.body.appendChild(c);
+  }
+</script>
+</body>
+</html>
